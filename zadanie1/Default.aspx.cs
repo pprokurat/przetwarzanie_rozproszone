@@ -118,7 +118,7 @@ namespace zadanie1
 
                 result = new double[m2_wiersze, m1_kolumny];
                 
-                Parallel.For(0, m1_wiersze, (i) =>
+                Parallel.For(0, m2_wiersze, (i) =>
                 {
                     for (int j = 0; j < m1_kolumny; j++)
                     {
