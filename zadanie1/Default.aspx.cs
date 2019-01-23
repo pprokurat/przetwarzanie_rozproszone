@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace zadanie1
 {
@@ -39,19 +40,48 @@ namespace zadanie1
                 }
             }
 
-            for (int i = 0; i < wiersze; i++)
-            {
-                for (int j = 0; j < kolumny; j++)
-                {
-                    Response.Write(macierz[i, j] + "/");
-                }
-                Response.Write("//");
-            }
+            //for (int i = 0; i < wiersze; i++)
+            //{
+            //    for (int j = 0; j < kolumny; j++)
+            //    {
+            //        Response.Write(macierz[i, j] + "/");
+            //    }
+            //    Response.Write("//");
+            //}
 
             return macierz;
         }
 
-        private void MnozenieMacierzy(double[,] m1, double[,] m2)
+        private void WypiszMacierz(double[,] m, long ms, long c)
+        {
+            string macierz = "[";
+
+            int wiersze = m.GetLength(0);
+            int kolumny = m.GetLength(1);
+
+            for (int i = 0; i < wiersze; i++)
+            {
+                for (int j = 0; j < kolumny; j++)
+                {
+                    macierz += m[i, j];
+
+                    if (j == kolumny - 1)
+                        break;
+                    else
+                        macierz += ",";
+                }
+
+                if (i<wiersze-1)
+                    macierz += "\r\n";
+            }
+
+            macierz += "]";
+
+            TextBox1.Text = macierz += "\r\n\r\nOperacja trwała:\r\n" + ms + " (milisekundy)\r\n" + c +" (cykle zegara)";
+
+        }
+
+        private double[,] MnozenieMacierzy(double[,] m1, double[,] m2)
         {           
             int m1_wiersze = m1.GetLength(0);
             int m1_kolumny = m1.GetLength(1);
@@ -62,7 +92,8 @@ namespace zadanie1
 
             if ((m1_kolumny != m2_wiersze) && (m2_kolumny != m1_wiersze))
             {
-                Response.Write("Nieodpowiednie wymiary macierzy! Ilość kolumn pierwszej macierzy musi odpowiadać ilości wierszy drugiej macierzy.");
+                result = new double[1, 1];
+                Label1.Text = "Nieodpowiednie wymiary macierzy! Ilość kolumn pierwszej macierzy musi odpowiadać ilości wierszy drugiej macierzy.";              
             }
             else if ((m1_kolumny != m2_wiersze) && (m2_kolumny == m1_wiersze))
             {
@@ -86,8 +117,8 @@ namespace zadanie1
                 }
 
                 result = new double[m2_wiersze, m1_kolumny];
-
-                for (int i = 0; i < m2_wiersze; i++)
+                
+                Parallel.For(0, m1_wiersze, (i) =>
                 {
                     for (int j = 0; j < m1_kolumny; j++)
                     {
@@ -96,22 +127,22 @@ namespace zadanie1
                             result[i, j] += m1_new[i, k] * m2_new[k, j];
                         }
                     }
-                }
+                });
 
-                for (int i = 0; i < m2_wiersze; i++)
-                {
-                    for (int j = 0; j < m1_kolumny; j++)
-                    {
-                        Response.Write(result[i, j] + "/");
-                    }
-                    Response.Write("//");
-                }
+                //for (int i = 0; i < m2_wiersze; i++)
+                //{
+                //    for (int j = 0; j < m1_kolumny; j++)
+                //    {
+                //        Response.Write(result[i, j] + "/");
+                //    }
+                //    Response.Write("//");
+                //}
             }
             else
             {
                 result = new double[m1_wiersze, m2_kolumny];
-
-                for (int i = 0; i < m1_wiersze; i++)
+                
+                Parallel.For (0, m1_wiersze, (i) =>
                 {
                     for (int j = 0; j < m2_kolumny; j++)
                     {
@@ -120,20 +151,19 @@ namespace zadanie1
                             result[i, j] += m1[i, k] * m2[k, j];
                         }
                     }
-                }
+                });
 
-                for (int i = 0; i < m1_wiersze; i++)
-                {
-                    for (int j = 0; j < m2_kolumny; j++)
-                    {
-                        Response.Write(result[i, j] + "/");
-                    }
-                    Response.Write("//");
-                }
+                //for (int i = 0; i < m1_wiersze; i++)
+                //{
+                //    for (int j = 0; j < m2_kolumny; j++)
+                //    {
+                //        Response.Write(result[i, j] + "/");
+                //    }
+                //    Response.Write("//");
+                //}                
             }
 
-            
-
+            return result;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -142,17 +172,32 @@ namespace zadanie1
         }
 
         protected void Button1_Click(object sender, EventArgs e)
-        {            
+        {
+            Label1.Text = "";
+            TextBox1.Text = "";
             double[,] macierz1 = WczytajMacierz("UploadedFiles/macierz1.txt");
             double[,] macierz2 = WczytajMacierz("UploadedFiles/macierz2.txt");
 
-            MnozenieMacierzy(macierz1,macierz2);
+            Stopwatch s = new Stopwatch();
+            s.Start();
+
+            double[,] result;
+            result = MnozenieMacierzy(macierz1,macierz2);
+
+            s.Stop();
+
+            long milisekundy = s.ElapsedMilliseconds;
+            long cykle = s.ElapsedTicks;
+
+            WypiszMacierz(result, milisekundy, cykle);
         }
 
 
 
         protected void Button3_Click(object sender, EventArgs e)
-        {            
+        {
+            Label1.Text = "";
+            TextBox1.Text = "";
             string fileExt1 = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
             if (fileExt1 == ".txt")
             {
@@ -161,7 +206,7 @@ namespace zadanie1
             }
             else
             {
-                Response.Write("Proszę wybrać plik *.txt");
+                Label1.Text = "Proszę wybrać plik *.txt";
             }
 
             string fileExt2 = System.IO.Path.GetExtension(FileUpload2.PostedFile.FileName);
@@ -172,7 +217,7 @@ namespace zadanie1
             }
             else
             {
-                Response.Write("Proszę wybrać plik *.txt");
+                Label1.Text = "Proszę wybrać plik *.txt";
             }
             
         }
