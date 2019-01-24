@@ -18,10 +18,10 @@ namespace zadanie1
         private Random rnd = new Random();
 
         private Bitmap DrawMandel(int width, int height, double Sx, double Sy, double Fx, double Fy)
-        {            
+        {
             // Holds all of the possible colors
             Color[] cs = new Color[256];
-            for (int i=0; i<256; i++)
+            for (int i = 0; i < 256; i++)
             {
                 cs[i] = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)); ;
             }
@@ -32,7 +32,7 @@ namespace zadanie1
             // From here on out is just converted from the c++ version.
             double x, y, x1, y1, xx, xmin, xmax, ymin, ymax = 0.0;
 
-            int looper, s, z = 0;
+            //int looper, z = 0;
             double intigralX, intigralY = 0.0;
             xmin = Sx; // Start x value, normally -2.1
             ymin = Sy; // Start y value, normally -1.3
@@ -42,23 +42,26 @@ namespace zadanie1
             intigralY = (ymax - ymin) / height;
             x = xmin;
 
-            for (s = 1; s < width; s++)
-            {
-                y = ymin;
-                
-                for (z = 1; z < height; z++)
-                {
-                    x1 = 0;
-                    y1 = 0;
-                    looper = 0;
+            int[,] colorTable = new int[width,height];
 
-                    while (looper < 100 && Math.Sqrt((x1 * x1) + (y1 * y1)) < 2)
-                    {
-                        looper++;
-                        xx = (x1 * x1) - (y1 * y1) + x;
-                        y1 = 2 * x1 * y1 + y;
-                        x1 = xx;
-                    }
+            for (int s = 0; s < width; s++)
+            //Parallel.For(0, width, s =>
+              {
+                  y = ymin;
+
+                  for (int z = 0; z < height; z++)
+                  {
+                      x1 = 0;
+                      y1 = 0;
+                      int looper = 0;
+
+                      while (looper < 100 && Math.Sqrt((x1 * x1) + (y1 * y1)) < 2)
+                      {
+                          looper++;
+                          xx = (x1 * x1) - (y1 * y1) + x;
+                          y1 = 2 * x1 * y1 + y;
+                          x1 = xx;
+                      }
 
                     //Parallel.For (0,100,l =>
                     //{
@@ -73,11 +76,21 @@ namespace zadanie1
                     // Get that part of a 255 scale
                     int val = ((int)(perc * 255));
                     // Use that number to set the color
-                    b.SetPixel(s, z, cs[val]);
-                    y += intigralY;
+                    //b.SetPixel(s, z, cs[val]);
+                    colorTable[s, z] = val;
+                      y += intigralY;
+                  }
+                  x += intigralX;
+              }//);
+
+            for (int i=1; i<width; i++)
+            {
+                for (int j=1; j<height; j++)
+                {
+                    b.SetPixel(i, j, cs[colorTable[i - 1, j - 1]]);
                 }
-                x += intigralX;
             }
+
             return b;
         }
 
@@ -309,6 +322,8 @@ namespace zadanie1
 
             long ms = s.ElapsedMilliseconds;
             long c = s.ElapsedTicks;
+
+            Image1.ImageUrl = "~/Images/image.bmp" + "?" + DateTime.Now.Ticks;
 
             TextBox4.Text = "Operacja trwała:\r\n" + ms + " (milisekundy)\r\n" + c + " (cykle zegara)";
         }
