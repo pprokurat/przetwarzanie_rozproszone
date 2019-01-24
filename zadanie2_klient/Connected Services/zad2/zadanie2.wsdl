@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="WypiszMacierz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WypiszMacierzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WypiszMacierzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="WypiszMacierzSoapIn">
+    <wsdl:part name="parameters" element="tns:WypiszMacierz" />
+  </wsdl:message>
+  <wsdl:message name="WypiszMacierzSoapOut">
+    <wsdl:part name="parameters" element="tns:WypiszMacierzResponse" />
+  </wsdl:message>
+  <wsdl:portType name="zadanie2Soap">
+    <wsdl:operation name="WypiszMacierz">
+      <wsdl:input message="tns:WypiszMacierzSoapIn" />
+      <wsdl:output message="tns:WypiszMacierzSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="zadanie2Soap" type="tns:zadanie2Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WypiszMacierz">
+      <soap:operation soapAction="http://tempuri.org/WypiszMacierz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="zadanie2Soap12" type="tns:zadanie2Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WypiszMacierz">
+      <soap12:operation soapAction="http://tempuri.org/WypiszMacierz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="zadanie2">
+    <wsdl:port name="zadanie2Soap" binding="tns:zadanie2Soap">
+      <soap:address location="http://localhost:65305/zadanie2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="zadanie2Soap12" binding="tns:zadanie2Soap12">
+      <soap12:address location="http://localhost:65305/zadanie2.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
