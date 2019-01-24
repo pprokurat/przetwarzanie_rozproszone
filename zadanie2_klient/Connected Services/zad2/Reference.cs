@@ -16,11 +16,18 @@ namespace zadanie2_klient.zad2 {
     public interface zadanie2Soap {
         
         // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu id1 z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WypiszMacierz", ReplyAction="*")]
-        zadanie2_klient.zad2.WypiszMacierzResponse WypiszMacierz(zadanie2_klient.zad2.WypiszMacierzRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PrzemnozMacierz", ReplyAction="*")]
+        zadanie2_klient.zad2.PrzemnozMacierzResponse PrzemnozMacierz(zadanie2_klient.zad2.PrzemnozMacierzRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WypiszMacierz", ReplyAction="*")]
-        System.Threading.Tasks.Task<zadanie2_klient.zad2.WypiszMacierzResponse> WypiszMacierzAsync(zadanie2_klient.zad2.WypiszMacierzRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PrzemnozMacierz", ReplyAction="*")]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.PrzemnozMacierzResponse> PrzemnozMacierzAsync(zadanie2_klient.zad2.PrzemnozMacierzRequest request);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu id z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PobierzMacierz", ReplyAction="*")]
+        zadanie2_klient.zad2.PobierzMacierzResponse PobierzMacierz(zadanie2_klient.zad2.PobierzMacierzRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PobierzMacierz", ReplyAction="*")]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.PobierzMacierzResponse> PobierzMacierzAsync(zadanie2_klient.zad2.PobierzMacierzRequest request);
         
         // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu DrawMandelResult z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DrawMandel", ReplyAction="*")]
@@ -28,21 +35,28 @@ namespace zadanie2_klient.zad2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DrawMandel", ReplyAction="*")]
         System.Threading.Tasks.Task<zadanie2_klient.zad2.DrawMandelResponse> DrawMandelAsync(zadanie2_klient.zad2.DrawMandelRequest request);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu b64 z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZapiszPlik", ReplyAction="*")]
+        zadanie2_klient.zad2.ZapiszPlikResponse ZapiszPlik(zadanie2_klient.zad2.ZapiszPlikRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ZapiszPlik", ReplyAction="*")]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.ZapiszPlikResponse> ZapiszPlikAsync(zadanie2_klient.zad2.ZapiszPlikRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class WypiszMacierzRequest {
+    public partial class PrzemnozMacierzRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="WypiszMacierz", Namespace="http://tempuri.org/", Order=0)]
-        public zadanie2_klient.zad2.WypiszMacierzRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PrzemnozMacierz", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.PrzemnozMacierzRequestBody Body;
         
-        public WypiszMacierzRequest() {
+        public PrzemnozMacierzRequest() {
         }
         
-        public WypiszMacierzRequest(zadanie2_klient.zad2.WypiszMacierzRequestBody Body) {
+        public PrzemnozMacierzRequest(zadanie2_klient.zad2.PrzemnozMacierzRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -51,7 +65,7 @@ namespace zadanie2_klient.zad2 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class WypiszMacierzRequestBody {
+    public partial class PrzemnozMacierzRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string id1;
@@ -59,10 +73,10 @@ namespace zadanie2_klient.zad2 {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string id2;
         
-        public WypiszMacierzRequestBody() {
+        public PrzemnozMacierzRequestBody() {
         }
         
-        public WypiszMacierzRequestBody(string id1, string id2) {
+        public PrzemnozMacierzRequestBody(string id1, string id2) {
             this.id1 = id1;
             this.id2 = id2;
         }
@@ -72,15 +86,15 @@ namespace zadanie2_klient.zad2 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class WypiszMacierzResponse {
+    public partial class PrzemnozMacierzResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="WypiszMacierzResponse", Namespace="http://tempuri.org/", Order=0)]
-        public zadanie2_klient.zad2.WypiszMacierzResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PrzemnozMacierzResponse", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.PrzemnozMacierzResponseBody Body;
         
-        public WypiszMacierzResponse() {
+        public PrzemnozMacierzResponse() {
         }
         
-        public WypiszMacierzResponse(zadanie2_klient.zad2.WypiszMacierzResponseBody Body) {
+        public PrzemnozMacierzResponse(zadanie2_klient.zad2.PrzemnozMacierzResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -89,16 +103,84 @@ namespace zadanie2_klient.zad2 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class WypiszMacierzResponseBody {
+    public partial class PrzemnozMacierzResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string WypiszMacierzResult;
+        public string PrzemnozMacierzResult;
         
-        public WypiszMacierzResponseBody() {
+        public PrzemnozMacierzResponseBody() {
         }
         
-        public WypiszMacierzResponseBody(string WypiszMacierzResult) {
-            this.WypiszMacierzResult = WypiszMacierzResult;
+        public PrzemnozMacierzResponseBody(string PrzemnozMacierzResult) {
+            this.PrzemnozMacierzResult = PrzemnozMacierzResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PobierzMacierzRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PobierzMacierz", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.PobierzMacierzRequestBody Body;
+        
+        public PobierzMacierzRequest() {
+        }
+        
+        public PobierzMacierzRequest(zadanie2_klient.zad2.PobierzMacierzRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class PobierzMacierzRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public PobierzMacierzRequestBody() {
+        }
+        
+        public PobierzMacierzRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class PobierzMacierzResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="PobierzMacierzResponse", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.PobierzMacierzResponseBody Body;
+        
+        public PobierzMacierzResponse() {
+        }
+        
+        public PobierzMacierzResponse(zadanie2_klient.zad2.PobierzMacierzResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class PobierzMacierzResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string PobierzMacierzResult;
+        
+        public PobierzMacierzResponseBody() {
+        }
+        
+        public PobierzMacierzResponseBody(string PobierzMacierzResult) {
+            this.PobierzMacierzResult = PobierzMacierzResult;
         }
     }
     
@@ -190,6 +272,78 @@ namespace zadanie2_klient.zad2 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZapiszPlikRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZapiszPlik", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.ZapiszPlikRequestBody Body;
+        
+        public ZapiszPlikRequest() {
+        }
+        
+        public ZapiszPlikRequest(zadanie2_klient.zad2.ZapiszPlikRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ZapiszPlikRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string b64;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string id;
+        
+        public ZapiszPlikRequestBody() {
+        }
+        
+        public ZapiszPlikRequestBody(string b64, string id) {
+            this.b64 = b64;
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ZapiszPlikResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ZapiszPlikResponse", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.ZapiszPlikResponseBody Body;
+        
+        public ZapiszPlikResponse() {
+        }
+        
+        public ZapiszPlikResponse(zadanie2_klient.zad2.ZapiszPlikResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ZapiszPlikResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ZapiszPlikResult;
+        
+        public ZapiszPlikResponseBody() {
+        }
+        
+        public ZapiszPlikResponseBody(string ZapiszPlikResult) {
+            this.ZapiszPlikResult = ZapiszPlikResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface zadanie2SoapChannel : zadanie2_klient.zad2.zadanie2Soap, System.ServiceModel.IClientChannel {
     }
@@ -218,30 +372,55 @@ namespace zadanie2_klient.zad2 {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        zadanie2_klient.zad2.WypiszMacierzResponse zadanie2_klient.zad2.zadanie2Soap.WypiszMacierz(zadanie2_klient.zad2.WypiszMacierzRequest request) {
-            return base.Channel.WypiszMacierz(request);
+        zadanie2_klient.zad2.PrzemnozMacierzResponse zadanie2_klient.zad2.zadanie2Soap.PrzemnozMacierz(zadanie2_klient.zad2.PrzemnozMacierzRequest request) {
+            return base.Channel.PrzemnozMacierz(request);
         }
         
-        public string WypiszMacierz(string id1, string id2) {
-            zadanie2_klient.zad2.WypiszMacierzRequest inValue = new zadanie2_klient.zad2.WypiszMacierzRequest();
-            inValue.Body = new zadanie2_klient.zad2.WypiszMacierzRequestBody();
+        public string PrzemnozMacierz(string id1, string id2) {
+            zadanie2_klient.zad2.PrzemnozMacierzRequest inValue = new zadanie2_klient.zad2.PrzemnozMacierzRequest();
+            inValue.Body = new zadanie2_klient.zad2.PrzemnozMacierzRequestBody();
             inValue.Body.id1 = id1;
             inValue.Body.id2 = id2;
-            zadanie2_klient.zad2.WypiszMacierzResponse retVal = ((zadanie2_klient.zad2.zadanie2Soap)(this)).WypiszMacierz(inValue);
-            return retVal.Body.WypiszMacierzResult;
+            zadanie2_klient.zad2.PrzemnozMacierzResponse retVal = ((zadanie2_klient.zad2.zadanie2Soap)(this)).PrzemnozMacierz(inValue);
+            return retVal.Body.PrzemnozMacierzResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<zadanie2_klient.zad2.WypiszMacierzResponse> zadanie2_klient.zad2.zadanie2Soap.WypiszMacierzAsync(zadanie2_klient.zad2.WypiszMacierzRequest request) {
-            return base.Channel.WypiszMacierzAsync(request);
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.PrzemnozMacierzResponse> zadanie2_klient.zad2.zadanie2Soap.PrzemnozMacierzAsync(zadanie2_klient.zad2.PrzemnozMacierzRequest request) {
+            return base.Channel.PrzemnozMacierzAsync(request);
         }
         
-        public System.Threading.Tasks.Task<zadanie2_klient.zad2.WypiszMacierzResponse> WypiszMacierzAsync(string id1, string id2) {
-            zadanie2_klient.zad2.WypiszMacierzRequest inValue = new zadanie2_klient.zad2.WypiszMacierzRequest();
-            inValue.Body = new zadanie2_klient.zad2.WypiszMacierzRequestBody();
+        public System.Threading.Tasks.Task<zadanie2_klient.zad2.PrzemnozMacierzResponse> PrzemnozMacierzAsync(string id1, string id2) {
+            zadanie2_klient.zad2.PrzemnozMacierzRequest inValue = new zadanie2_klient.zad2.PrzemnozMacierzRequest();
+            inValue.Body = new zadanie2_klient.zad2.PrzemnozMacierzRequestBody();
             inValue.Body.id1 = id1;
             inValue.Body.id2 = id2;
-            return ((zadanie2_klient.zad2.zadanie2Soap)(this)).WypiszMacierzAsync(inValue);
+            return ((zadanie2_klient.zad2.zadanie2Soap)(this)).PrzemnozMacierzAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        zadanie2_klient.zad2.PobierzMacierzResponse zadanie2_klient.zad2.zadanie2Soap.PobierzMacierz(zadanie2_klient.zad2.PobierzMacierzRequest request) {
+            return base.Channel.PobierzMacierz(request);
+        }
+        
+        public string PobierzMacierz(string id) {
+            zadanie2_klient.zad2.PobierzMacierzRequest inValue = new zadanie2_klient.zad2.PobierzMacierzRequest();
+            inValue.Body = new zadanie2_klient.zad2.PobierzMacierzRequestBody();
+            inValue.Body.id = id;
+            zadanie2_klient.zad2.PobierzMacierzResponse retVal = ((zadanie2_klient.zad2.zadanie2Soap)(this)).PobierzMacierz(inValue);
+            return retVal.Body.PobierzMacierzResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.PobierzMacierzResponse> zadanie2_klient.zad2.zadanie2Soap.PobierzMacierzAsync(zadanie2_klient.zad2.PobierzMacierzRequest request) {
+            return base.Channel.PobierzMacierzAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<zadanie2_klient.zad2.PobierzMacierzResponse> PobierzMacierzAsync(string id) {
+            zadanie2_klient.zad2.PobierzMacierzRequest inValue = new zadanie2_klient.zad2.PobierzMacierzRequest();
+            inValue.Body = new zadanie2_klient.zad2.PobierzMacierzRequestBody();
+            inValue.Body.id = id;
+            return ((zadanie2_klient.zad2.zadanie2Soap)(this)).PobierzMacierzAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -277,6 +456,33 @@ namespace zadanie2_klient.zad2 {
             inValue.Body.Fx = Fx;
             inValue.Body.Fy = Fy;
             return ((zadanie2_klient.zad2.zadanie2Soap)(this)).DrawMandelAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        zadanie2_klient.zad2.ZapiszPlikResponse zadanie2_klient.zad2.zadanie2Soap.ZapiszPlik(zadanie2_klient.zad2.ZapiszPlikRequest request) {
+            return base.Channel.ZapiszPlik(request);
+        }
+        
+        public string ZapiszPlik(string b64, string id) {
+            zadanie2_klient.zad2.ZapiszPlikRequest inValue = new zadanie2_klient.zad2.ZapiszPlikRequest();
+            inValue.Body = new zadanie2_klient.zad2.ZapiszPlikRequestBody();
+            inValue.Body.b64 = b64;
+            inValue.Body.id = id;
+            zadanie2_klient.zad2.ZapiszPlikResponse retVal = ((zadanie2_klient.zad2.zadanie2Soap)(this)).ZapiszPlik(inValue);
+            return retVal.Body.ZapiszPlikResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.ZapiszPlikResponse> zadanie2_klient.zad2.zadanie2Soap.ZapiszPlikAsync(zadanie2_klient.zad2.ZapiszPlikRequest request) {
+            return base.Channel.ZapiszPlikAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<zadanie2_klient.zad2.ZapiszPlikResponse> ZapiszPlikAsync(string b64, string id) {
+            zadanie2_klient.zad2.ZapiszPlikRequest inValue = new zadanie2_klient.zad2.ZapiszPlikRequest();
+            inValue.Body = new zadanie2_klient.zad2.ZapiszPlikRequestBody();
+            inValue.Body.b64 = b64;
+            inValue.Body.id = id;
+            return ((zadanie2_klient.zad2.zadanie2Soap)(this)).ZapiszPlikAsync(inValue);
         }
     }
 }

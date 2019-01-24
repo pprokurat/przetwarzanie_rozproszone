@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
 
 namespace zadanie2
 {
@@ -62,14 +63,15 @@ namespace zadanie2
         }
 
         [WebMethod]
-        public string WypiszMacierz(string id1, string id2)
+        public string PrzemnozMacierz(string id1, string id2)
         {
             double[,] m1 = WczytajMacierz("UploadedFiles/" + id1 + ".txt");
             double[,] m2 = WczytajMacierz("UploadedFiles/" + id2 + ".txt");
 
             double[,] m = MnozenieMacierzy(m1, m2);
 
-            string macierz = "[";
+            //string macierz = "[";
+            string macierz = "";
 
             int wiersze = m.GetLength(0);
             int kolumny = m.GetLength(1);
@@ -87,14 +89,44 @@ namespace zadanie2
                 }
 
                 if (i < wiersze - 1)
-                    macierz += "\r\n";
+                    macierz += ";";
+                    //macierz += "\r\n";
             }
 
-            macierz += "]";
+            //macierz += "]";
 
             //macierz += "\r\n\r\nOperacja trwała:\r\n" + ms + " (milisekundy)\r\n" + c + " (cykle zegara)";
 
-            return macierz;
+            string serverPath = Server.MapPath("UploadedFiles/" + id1 + "_" + id2 + ".txt");
+            using (StreamWriter sw = new StreamWriter(serverPath))
+            {
+                sw.WriteLine(macierz);
+                sw.Flush();
+                sw.Close();
+            }
+
+            string id = id1 + "_" + id2;
+
+            return id;
+        }
+
+        [WebMethod]
+        public string PobierzMacierz(string id)
+        {
+            string serverPath = Server.MapPath("UploadedFiles/" + id + ".txt");
+            string file = "";
+
+            if (File.Exists(serverPath))
+            {
+                byte[] bytes = File.ReadAllBytes(serverPath);
+                file = Convert.ToBase64String(bytes);
+            }
+            else
+            {
+                file = "404";
+            }                
+
+            return file;
         }
 
         private double[,] MnozenieMacierzy(double[,] m1, double[,] m2)
@@ -254,6 +286,23 @@ namespace zadanie2
             string b64 = Convert.ToBase64String(imageBytes);
 
             return b64;
+        }
+
+        [WebMethod]
+        public string ZapiszPlik(string b64, string id)
+        {
+            byte[] data = Convert.FromBase64String(b64);
+            string decodedString = Encoding.UTF8.GetString(data);
+
+            string serverPath = Server.MapPath("UploadedFiles/" + id + ".txt");
+            using (StreamWriter sw = new StreamWriter(serverPath))
+            {                
+                    sw.WriteLine(decodedString);
+                    sw.Flush();
+                    sw.Close();
+            }
+
+            return id;
         }
     }
 }

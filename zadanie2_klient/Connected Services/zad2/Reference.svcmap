@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="208010db-ceca-45cd-b408-81b1416dded4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="334fc0c0-a53f-4311-80b3-7d324eb04180" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:65305/zadanie2.asmx?WSDL" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="zadanie2.wsdl" MetadataType="Wsdl" ID="bc23066d-a62d-41c5-8ae0-ac61b165f882" SourceId="1" SourceUrl="http://localhost:65305/zadanie2.asmx?WSDL" />
+    <MetadataFile FileName="zadanie2.wsdl" MetadataType="Wsdl" ID="de8f6772-a245-440f-ba35-3de986f07f59" SourceId="1" SourceUrl="http://localhost:65305/zadanie2.asmx?WSDL" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

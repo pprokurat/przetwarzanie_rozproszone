@@ -142,7 +142,13 @@
     <Content Include="Connected Services\zad2\zadanie2_klient.zad2.DrawMandelResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\zad2\zadanie2_klient.zad2.WypiszMacierzResponse.datasource">
+    <Content Include="Connected Services\zad2\zadanie2_klient.zad2.PobierzMacierzResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\zad2\zadanie2_klient.zad2.PrzemnozMacierzResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\zad2\zadanie2_klient.zad2.ZapiszPlikResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -238,6 +244,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

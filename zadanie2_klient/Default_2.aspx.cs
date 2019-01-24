@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Text;
 
 namespace zadanie2_klient
 {
@@ -19,9 +21,9 @@ namespace zadanie2_klient
         protected void Button1_Click(object sender, EventArgs e)
         {
             zad2.zadanie2SoapClient client = new zad2.zadanie2SoapClient("zadanie2Soap");
-            string wynik = client.WypiszMacierz(TextBox1.Text,TextBox2.Text);
+            string id = client.PrzemnozMacierz(TextBox1.Text,TextBox2.Text);
 
-            TextBox3.Text = wynik;            
+            TextBox10.Text = "Wykonano mnożenie macierzy, id macierzy wynikowej to: " + id + ".\r\n";
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -43,6 +45,59 @@ namespace zadanie2_klient
 
             string serverPath = Server.MapPath("Images/image.bmp");
             bmp.Save(serverPath, System.Drawing.Imaging.ImageFormat.Bmp);
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Label1.Text = "";
+            TextBox1.Text = "";
+            string fileExt = System.IO.Path.GetExtension(FileUpload1.PostedFile.FileName);
+            if (fileExt == ".txt")
+            {
+                string id = System.IO.Path.GetFileNameWithoutExtension(FileUpload1.PostedFile.FileName);
+                string serverPath = Server.MapPath("UploadedFiles/"+ id + ".txt");
+                FileUpload1.PostedFile.SaveAs(serverPath);
+
+                byte[] bytes = File.ReadAllBytes(serverPath);
+                string file = Convert.ToBase64String(bytes);
+
+                zad2.zadanie2SoapClient client = new zad2.zadanie2SoapClient("zadanie2Soap");
+                string id_returned = client.ZapiszPlik(file,id);
+                TextBox10.Text = "Przesłano plik, id macierzy to: " + id + ".\r\n";
+            }
+            else
+            {
+                Label1.Text = "Proszę wybrać plik *.txt";
+            }
+            
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            string id = TextBox3.Text;
+            zad2.zadanie2SoapClient client = new zad2.zadanie2SoapClient("zadanie2Soap");
+            string b64 = client.PobierzMacierz(id);            
+
+            if (b64 != "404")
+            {
+                byte[] data = Convert.FromBase64String(b64);
+                string decodedString = Encoding.UTF8.GetString(data);
+
+                string serverPath = Server.MapPath("UploadedFiles/" + id + ".txt");
+
+                using (StreamWriter sw = new StreamWriter(serverPath))
+                {
+                    sw.WriteLine(decodedString);
+                    sw.Flush();
+                    sw.Close();
+                }
+                TextBox10.Text = "Pobrano plik.\r\n";
+            }
+            else
+            {
+                TextBox10.Text = "Error 404. Nie znaleziono pliku.\r\n";
+            }
+            
         }
     }
 }

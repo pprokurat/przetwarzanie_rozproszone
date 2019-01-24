@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="WypiszMacierz">
+      <s:element name="PrzemnozMacierz">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="id1" type="s:string" />
@@ -10,10 +10,24 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="WypiszMacierzResponse">
+      <s:element name="PrzemnozMacierzResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="WypiszMacierzResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PrzemnozMacierzResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PobierzMacierz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PobierzMacierzResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PobierzMacierzResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -36,13 +50,34 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ZapiszPlik">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="b64" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZapiszPlikResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZapiszPlikResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="WypiszMacierzSoapIn">
-    <wsdl:part name="parameters" element="tns:WypiszMacierz" />
+  <wsdl:message name="PrzemnozMacierzSoapIn">
+    <wsdl:part name="parameters" element="tns:PrzemnozMacierz" />
   </wsdl:message>
-  <wsdl:message name="WypiszMacierzSoapOut">
-    <wsdl:part name="parameters" element="tns:WypiszMacierzResponse" />
+  <wsdl:message name="PrzemnozMacierzSoapOut">
+    <wsdl:part name="parameters" element="tns:PrzemnozMacierzResponse" />
+  </wsdl:message>
+  <wsdl:message name="PobierzMacierzSoapIn">
+    <wsdl:part name="parameters" element="tns:PobierzMacierz" />
+  </wsdl:message>
+  <wsdl:message name="PobierzMacierzSoapOut">
+    <wsdl:part name="parameters" element="tns:PobierzMacierzResponse" />
   </wsdl:message>
   <wsdl:message name="DrawMandelSoapIn">
     <wsdl:part name="parameters" element="tns:DrawMandel" />
@@ -50,20 +85,43 @@
   <wsdl:message name="DrawMandelSoapOut">
     <wsdl:part name="parameters" element="tns:DrawMandelResponse" />
   </wsdl:message>
+  <wsdl:message name="ZapiszPlikSoapIn">
+    <wsdl:part name="parameters" element="tns:ZapiszPlik" />
+  </wsdl:message>
+  <wsdl:message name="ZapiszPlikSoapOut">
+    <wsdl:part name="parameters" element="tns:ZapiszPlikResponse" />
+  </wsdl:message>
   <wsdl:portType name="zadanie2Soap">
-    <wsdl:operation name="WypiszMacierz">
-      <wsdl:input message="tns:WypiszMacierzSoapIn" />
-      <wsdl:output message="tns:WypiszMacierzSoapOut" />
+    <wsdl:operation name="PrzemnozMacierz">
+      <wsdl:input message="tns:PrzemnozMacierzSoapIn" />
+      <wsdl:output message="tns:PrzemnozMacierzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PobierzMacierz">
+      <wsdl:input message="tns:PobierzMacierzSoapIn" />
+      <wsdl:output message="tns:PobierzMacierzSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="DrawMandel">
       <wsdl:input message="tns:DrawMandelSoapIn" />
       <wsdl:output message="tns:DrawMandelSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ZapiszPlik">
+      <wsdl:input message="tns:ZapiszPlikSoapIn" />
+      <wsdl:output message="tns:ZapiszPlikSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="zadanie2Soap" type="tns:zadanie2Soap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="WypiszMacierz">
-      <soap:operation soapAction="http://tempuri.org/WypiszMacierz" style="document" />
+    <wsdl:operation name="PrzemnozMacierz">
+      <soap:operation soapAction="http://tempuri.org/PrzemnozMacierz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzMacierz">
+      <soap:operation soapAction="http://tempuri.org/PobierzMacierz" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -80,11 +138,29 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ZapiszPlik">
+      <soap:operation soapAction="http://tempuri.org/ZapiszPlik" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="zadanie2Soap12" type="tns:zadanie2Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="WypiszMacierz">
-      <soap12:operation soapAction="http://tempuri.org/WypiszMacierz" style="document" />
+    <wsdl:operation name="PrzemnozMacierz">
+      <soap12:operation soapAction="http://tempuri.org/PrzemnozMacierz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PobierzMacierz">
+      <soap12:operation soapAction="http://tempuri.org/PobierzMacierz" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -94,6 +170,15 @@
     </wsdl:operation>
     <wsdl:operation name="DrawMandel">
       <soap12:operation soapAction="http://tempuri.org/DrawMandel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZapiszPlik">
+      <soap12:operation soapAction="http://tempuri.org/ZapiszPlik" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
