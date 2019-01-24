@@ -21,6 +21,13 @@ namespace zadanie2_klient.zad2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WypiszMacierz", ReplyAction="*")]
         System.Threading.Tasks.Task<zadanie2_klient.zad2.WypiszMacierzResponse> WypiszMacierzAsync(zadanie2_klient.zad2.WypiszMacierzRequest request);
+        
+        // CODEGEN: Trwa generowanie kontraktu komunikatu, ponieważ nazwa elementu DrawMandelResult z przestrzeni nazw http://tempuri.org/ nie ma atrybutu nillable.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DrawMandel", ReplyAction="*")]
+        zadanie2_klient.zad2.DrawMandelResponse DrawMandel(zadanie2_klient.zad2.DrawMandelRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DrawMandel", ReplyAction="*")]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.DrawMandelResponse> DrawMandelAsync(zadanie2_klient.zad2.DrawMandelRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -95,6 +102,94 @@ namespace zadanie2_klient.zad2 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DrawMandelRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DrawMandel", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.DrawMandelRequestBody Body;
+        
+        public DrawMandelRequest() {
+        }
+        
+        public DrawMandelRequest(zadanie2_klient.zad2.DrawMandelRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DrawMandelRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int width;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int height;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public double Sx;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public double Sy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public double Fx;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public double Fy;
+        
+        public DrawMandelRequestBody() {
+        }
+        
+        public DrawMandelRequestBody(int width, int height, double Sx, double Sy, double Fx, double Fy) {
+            this.width = width;
+            this.height = height;
+            this.Sx = Sx;
+            this.Sy = Sy;
+            this.Fx = Fx;
+            this.Fy = Fy;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class DrawMandelResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="DrawMandelResponse", Namespace="http://tempuri.org/", Order=0)]
+        public zadanie2_klient.zad2.DrawMandelResponseBody Body;
+        
+        public DrawMandelResponse() {
+        }
+        
+        public DrawMandelResponse(zadanie2_klient.zad2.DrawMandelResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class DrawMandelResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string DrawMandelResult;
+        
+        public DrawMandelResponseBody() {
+        }
+        
+        public DrawMandelResponseBody(string DrawMandelResult) {
+            this.DrawMandelResult = DrawMandelResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface zadanie2SoapChannel : zadanie2_klient.zad2.zadanie2Soap, System.ServiceModel.IClientChannel {
     }
@@ -147,6 +242,41 @@ namespace zadanie2_klient.zad2 {
             inValue.Body.id1 = id1;
             inValue.Body.id2 = id2;
             return ((zadanie2_klient.zad2.zadanie2Soap)(this)).WypiszMacierzAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        zadanie2_klient.zad2.DrawMandelResponse zadanie2_klient.zad2.zadanie2Soap.DrawMandel(zadanie2_klient.zad2.DrawMandelRequest request) {
+            return base.Channel.DrawMandel(request);
+        }
+        
+        public string DrawMandel(int width, int height, double Sx, double Sy, double Fx, double Fy) {
+            zadanie2_klient.zad2.DrawMandelRequest inValue = new zadanie2_klient.zad2.DrawMandelRequest();
+            inValue.Body = new zadanie2_klient.zad2.DrawMandelRequestBody();
+            inValue.Body.width = width;
+            inValue.Body.height = height;
+            inValue.Body.Sx = Sx;
+            inValue.Body.Sy = Sy;
+            inValue.Body.Fx = Fx;
+            inValue.Body.Fy = Fy;
+            zadanie2_klient.zad2.DrawMandelResponse retVal = ((zadanie2_klient.zad2.zadanie2Soap)(this)).DrawMandel(inValue);
+            return retVal.Body.DrawMandelResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<zadanie2_klient.zad2.DrawMandelResponse> zadanie2_klient.zad2.zadanie2Soap.DrawMandelAsync(zadanie2_klient.zad2.DrawMandelRequest request) {
+            return base.Channel.DrawMandelAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<zadanie2_klient.zad2.DrawMandelResponse> DrawMandelAsync(int width, int height, double Sx, double Sy, double Fx, double Fy) {
+            zadanie2_klient.zad2.DrawMandelRequest inValue = new zadanie2_klient.zad2.DrawMandelRequest();
+            inValue.Body = new zadanie2_klient.zad2.DrawMandelRequestBody();
+            inValue.Body.width = width;
+            inValue.Body.height = height;
+            inValue.Body.Sx = Sx;
+            inValue.Body.Sy = Sy;
+            inValue.Body.Fx = Fx;
+            inValue.Body.Fy = Fy;
+            return ((zadanie2_klient.zad2.zadanie2Soap)(this)).DrawMandelAsync(inValue);
         }
     }
 }

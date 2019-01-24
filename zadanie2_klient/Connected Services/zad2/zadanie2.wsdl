@@ -17,6 +17,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="DrawMandel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="width" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="height" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sx" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sy" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Fx" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="Fy" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DrawMandelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DrawMandelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="WypiszMacierzSoapIn">
@@ -25,10 +44,20 @@
   <wsdl:message name="WypiszMacierzSoapOut">
     <wsdl:part name="parameters" element="tns:WypiszMacierzResponse" />
   </wsdl:message>
+  <wsdl:message name="DrawMandelSoapIn">
+    <wsdl:part name="parameters" element="tns:DrawMandel" />
+  </wsdl:message>
+  <wsdl:message name="DrawMandelSoapOut">
+    <wsdl:part name="parameters" element="tns:DrawMandelResponse" />
+  </wsdl:message>
   <wsdl:portType name="zadanie2Soap">
     <wsdl:operation name="WypiszMacierz">
       <wsdl:input message="tns:WypiszMacierzSoapIn" />
       <wsdl:output message="tns:WypiszMacierzSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DrawMandel">
+      <wsdl:input message="tns:DrawMandelSoapIn" />
+      <wsdl:output message="tns:DrawMandelSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="zadanie2Soap" type="tns:zadanie2Soap">
@@ -42,11 +71,29 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DrawMandel">
+      <soap:operation soapAction="http://tempuri.org/DrawMandel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="zadanie2Soap12" type="tns:zadanie2Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="WypiszMacierz">
       <soap12:operation soapAction="http://tempuri.org/WypiszMacierz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DrawMandel">
+      <soap12:operation soapAction="http://tempuri.org/DrawMandel" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

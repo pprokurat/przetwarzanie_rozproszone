@@ -6,6 +6,8 @@ using System.Web.Services;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace zadanie2
 {
@@ -179,6 +181,79 @@ namespace zadanie2
             }
 
             return result;
+        }
+
+        private Random rnd = new Random();
+
+        [WebMethod]
+        public string DrawMandel(int width, int height, double Sx, double Sy, double Fx, double Fy)
+        {
+            // Holds all of the possible colors
+            Color[] cs = new Color[256];
+            for (int i = 0; i < 256; i++)
+            {
+                cs[i] = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)); ;
+            }
+            // Fills cs with the colors from the current ColorMap file
+            //cs = GetColors(ColMaps[CurColMap]);
+            // Creates the Bitmap we draw to
+            Bitmap b = new Bitmap(width, height);
+            // From here on out is just converted from the c++ version.
+            double x, y, x1, y1, xx, xmin, xmax, ymin, ymax = 0.0;
+
+            int looper, s, z = 0;
+            double intigralX, intigralY = 0.0;
+            xmin = Sx; // Start x value, normally -2.1
+            ymin = Sy; // Start y value, normally -1.3
+            xmax = Fx; // Finish x value, normally 1
+            ymax = Fy; // Finish y value, normally 1.3
+            intigralX = (xmax - xmin) / width; // Make it fill the whole window
+            intigralY = (ymax - ymin) / height;
+            x = xmin;
+
+            for (s = 1; s < width; s++)
+            {
+                y = ymin;
+
+                for (z = 1; z < height; z++)
+                {
+                    x1 = 0;
+                    y1 = 0;
+                    looper = 0;
+
+                    while (looper < 100 && Math.Sqrt((x1 * x1) + (y1 * y1)) < 2)
+                    {
+                        looper++;
+                        xx = (x1 * x1) - (y1 * y1) + x;
+                        y1 = 2 * x1 * y1 + y;
+                        x1 = xx;
+                    }
+
+                    //Parallel.For (0,100,l =>
+                    //{
+                    //    looper=l+1;
+                    //    xx = (x1 * x1) - (y1 * y1) + x;
+                    //    y1 = 2 * x1 * y1 + y;
+                    //    x1 = xx;
+                    //});
+
+                    // Get the percent of where the looper stopped
+                    double perc = looper / (100.0);
+                    // Get that part of a 255 scale
+                    int val = ((int)(perc * 255));
+                    // Use that number to set the color
+                    b.SetPixel(s, z, cs[val]);
+                    y += intigralY;
+                }
+                x += intigralX;
+            }
+
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            b.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+            byte[] imageBytes = stream.ToArray();
+            string b64 = Convert.ToBase64String(imageBytes);
+
+            return b64;
         }
     }
 }
